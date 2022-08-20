@@ -1,5 +1,7 @@
 package edu.school21.cinema.services;
 
 public interface UserService {
-    boolean sign(String email, String password);
+    boolean signUp(String email, String password);
+
+    boolean signIn(String email, String password);
 }

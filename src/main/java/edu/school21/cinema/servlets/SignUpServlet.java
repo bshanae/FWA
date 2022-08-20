@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/sign-in")
-public class SignInServlet extends CinemaServlet {
+@WebServlet("/sign-up")
+public class SignUpServlet extends CinemaServlet {
     @Autowired
     @Qualifier("jspDirectory")
     private String jspDirectory;
@@ -21,7 +21,7 @@ public class SignInServlet extends CinemaServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        getServletContext().getRequestDispatcher(jspDirectory + "sign-in.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher(jspDirectory + "sign-up.jsp").forward(request, response);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class SignInServlet extends CinemaServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        boolean result = userService.signIn(email, password);
+        boolean result = userService.signUp(email, password);
 
         response.getWriter().write(Boolean.toString(result));
     }
