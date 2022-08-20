@@ -15,15 +15,19 @@ import java.io.IOException;
 @WebServlet("/sign-up")
 public class SignUpServlet extends CinemaServlet {
     @Autowired
-    @Qualifier("jspDirectory")
-    private String jspDirectory;
+    @Qualifier("jspSignUp")
+    private String jspSignUp;
+
+    @Autowired
+    @Qualifier("uriProfile")
+    private String uriProfile;
 
     @Autowired
     private UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        getServletContext().getRequestDispatcher(jspDirectory + "sign-up.jsp").forward(request, response);
+        request.getRequestDispatcher(jspSignUp).forward(request, response);
     }
 
     @Override
@@ -34,7 +38,7 @@ public class SignUpServlet extends CinemaServlet {
         User user = userService.signUp(email, password);
         if (user != null) {
             request.getSession().setAttribute(SessionKey.TOKEN, user.getToken());
-            response.getWriter().write("Ok");
+            response.sendRedirect(uriProfile);
         } else {
             response.getWriter().write("Can't create user");
         }

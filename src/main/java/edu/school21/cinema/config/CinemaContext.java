@@ -10,8 +10,23 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("edu.school21.cinema")
 public class CinemaContext {
     @Bean
-    public String jspDirectory() {
-        return "/WEB-INF/jsp/";
+    public String jspSignIn() {
+        return "/WEB-INF/jsp/sign-in.jsp";
+    }
+
+    @Bean
+    public String jspSignUp() {
+        return "/WEB-INF/jsp/sign-in.jsp";
+    }
+
+    @Bean
+    public String jspProfile() {
+        return "/WEB-INF/jsp/profile.jsp";
+    }
+
+    @Bean
+    public String uriProfile() {
+        return "/profile";
     }
 
     @Bean

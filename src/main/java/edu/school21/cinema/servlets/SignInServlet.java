@@ -15,8 +15,12 @@ import java.io.IOException;
 @WebServlet("/sign-in")
 public class SignInServlet extends CinemaServlet {
     @Autowired
-    @Qualifier("jspDirectory")
-    private String jspDirectory;
+    @Qualifier("jspSignIn")
+    private String jspSignIn;
+
+    @Autowired
+    @Qualifier("uriProfile")
+    private String uriProfile;
 
     @Autowired
     private UserService userService;
@@ -24,9 +28,9 @@ public class SignInServlet extends CinemaServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         if (request.getSession().getAttribute(SessionKey.TOKEN) != null)
-            response.getWriter().write("Ok");
+            response.sendRedirect(uriProfile);
         else
-            getServletContext().getRequestDispatcher(jspDirectory + "sign-in.jsp").forward(request, response);
+            request.getRequestDispatcher(jspSignIn).forward(request, response);
     }
 
     @Override
@@ -37,7 +41,7 @@ public class SignInServlet extends CinemaServlet {
         User user = userService.signIn(email, password);
         if (user != null) {
             request.getSession().setAttribute(SessionKey.TOKEN, user.getToken());
-            response.getWriter().write("Ok");
+            response.sendRedirect(uriProfile);
         } else {
             response.getWriter().write("No User");
         }

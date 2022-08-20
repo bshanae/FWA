@@ -4,10 +4,11 @@
     <title>Sign in</title>
 </head>
 <body>
+    <h2>Sign in</h2>
     <form action="sign-in" method="post">
         <div>
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter email" required>
+            <input type="email" id="email" name="email" placeholder="Enter email" value="example@gmail.com" required>
         </div>
         <div>
             <label for="password">Password</label>

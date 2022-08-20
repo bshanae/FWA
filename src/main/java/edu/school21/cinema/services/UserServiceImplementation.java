@@ -13,4 +13,8 @@ public class UserServiceImplementation implements UserService {
 
         return null;
     }
+
+    public User findByToken(String token) {
+        return new User(token, "_");
+    }
 }

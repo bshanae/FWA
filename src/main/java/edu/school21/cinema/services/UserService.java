@@ -6,4 +6,6 @@ public interface UserService {
     User signUp(String email, String password);
 
     User signIn(String email, String password);
+
+    User findByToken(String token);
 }

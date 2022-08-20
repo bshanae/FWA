@@ -4,6 +4,7 @@
     <title>Sign up</title>
 </head>
 <body>
+    <h2>Sign up</h2>
     <form action="sign-up" method="post">
         <div>
             <label for="email">Email</label>
