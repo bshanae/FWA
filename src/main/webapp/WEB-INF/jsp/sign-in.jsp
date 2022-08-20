@@ -4,15 +4,15 @@
     <title>Sign in</title>
 </head>
 <body>
-    <h2>Sign in</h2>
+    <h1>Sign in</h1>
     <form action="sign-in" method="post">
         <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter email" value="example@gmail.com" required>
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" required>
         </div>
         <div>
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter password" required>
+            <input type="password" id="password" name="password" required>
         </div>
         <div>
             <button type="submit">Sign in</button>

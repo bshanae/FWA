@@ -16,7 +16,7 @@ public class CinemaContext {
 
     @Bean
     public String jspSignUp() {
-        return "/WEB-INF/jsp/sign-in.jsp";
+        return "/WEB-INF/jsp/sign-up.jsp";
     }
 
     @Bean

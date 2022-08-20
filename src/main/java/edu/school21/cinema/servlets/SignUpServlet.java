@@ -32,15 +32,23 @@ public class SignUpServlet extends CinemaServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String email = request.getParameter("email");
+        String firstName = request.getParameter("first-name");
+        String lastName = request.getParameter("last-name");
+        String phone = request.getParameter("phone");
         String password = request.getParameter("password");
 
-        User user = userService.signUp(email, password);
-        if (user != null) {
-            request.getSession().setAttribute(SessionKey.TOKEN, user.getToken());
-            response.sendRedirect(uriProfile);
-        } else {
-            response.getWriter().write("Can't create user");
+        if (firstName == null || lastName == null || phone == null || password == null) {
+            response.getWriter().write("Invalid request!");
+            return;
         }
+
+        User user = userService.signUp(firstName, lastName, phone, password);
+        if (user == null) {
+            response.getWriter().write("Can't create user!");
+            return;
+        }
+
+        request.getSession().setAttribute(SessionKey.TOKEN, user.getToken());
+        response.sendRedirect(uriProfile);
     }
 }

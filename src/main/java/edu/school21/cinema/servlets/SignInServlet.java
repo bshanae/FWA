@@ -32,15 +32,21 @@ public class SignInServlet extends CinemaServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
         String password = request.getParameter("password");
 
-        User user = userService.signIn(email, password);
-        if (user != null) {
-            request.getSession().setAttribute(SessionKey.TOKEN, user.getToken());
-            response.sendRedirect(uriProfile);
-        } else {
-            response.getWriter().write("No User");
+        if (phone == null || password == null) {
+            response.getWriter().write("Invalid request!");
+            return;
         }
+
+        User user = userService.signIn(phone, password);
+        if (user == null) {
+            response.getWriter().write("User not found!");
+            return;
+        }
+
+        request.getSession().setAttribute(SessionKey.TOKEN, user.getToken());
+        response.sendRedirect(uriProfile);
     }
 }

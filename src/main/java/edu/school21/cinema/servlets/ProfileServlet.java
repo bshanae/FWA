@@ -26,7 +26,9 @@ public class ProfileServlet extends CinemaServlet {
         String token = (String) request.getSession().getAttribute(SessionKey.TOKEN);
         User user = userService.findByToken(token);
 
-        request.setAttribute("email", user.getEmail());
+        request.setAttribute("firstName", user.getFirstName());
+        request.setAttribute("lastName", user.getLastName());
+        request.setAttribute("phone", user.getPhoneNumber());
         request.getRequestDispatcher(jspProfile).forward(request, response);
     }
 }

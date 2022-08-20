@@ -1,20 +1,22 @@
 package edu.school21.cinema.models;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 public class User {
-    private String email;
-    private String password;
+    private final String firstName;
+    private final String lastName;
+    private final String phoneNumber;
+    private final String password;
 
-    public User(String email, String password) {
-       this.email = email;
-       this.password = password;
+    public User(String firstName, String lastName, String phoneNumber, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
     }
 
     public String getToken() {
-        return email;
+        return phoneNumber;
     }
 }
