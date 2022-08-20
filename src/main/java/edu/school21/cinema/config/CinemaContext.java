@@ -10,6 +10,11 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("edu.school21.cinema")
 public class CinemaContext {
     @Bean
+    public String jspDirectory() {
+        return "/WEB-INF/jsp/";
+    }
+
+    @Bean
     public UserService userService() {
         return new UserServiceImplementation();
     }
