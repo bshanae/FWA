@@ -27,10 +27,7 @@ public class SignInServlet extends CinemaServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        if (request.getSession().getAttribute(SessionKey.TOKEN) != null)
-            response.sendRedirect(uriProfile);
-        else
-            request.getRequestDispatcher(jspSignIn).forward(request, response);
+        request.getRequestDispatcher(jspSignIn).forward(request, response);
     }
 
     @Override
