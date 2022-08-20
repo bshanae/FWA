@@ -1,11 +1,16 @@
 package edu.school21.cinema.services;
 
+import edu.school21.cinema.models.User;
+
 public class UserServiceImplementation implements UserService {
-    public boolean signUp(String email, String password) {
-        return true;
+    public User signUp(String email, String password) {
+        return new User(email, password);
     }
 
-    public boolean signIn(String email, String password) {
-        return password.equals("0");
+    public User signIn(String email, String password) {
+        if (password.equals("0"))
+            return new User(email, password);
+
+        return null;
     }
 }

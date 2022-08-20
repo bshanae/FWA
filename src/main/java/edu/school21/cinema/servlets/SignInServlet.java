@@ -1,5 +1,7 @@
 package edu.school21.cinema.servlets;
 
+import edu.school21.cinema.SessionKey;
+import edu.school21.cinema.models.User;
 import edu.school21.cinema.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,7 +23,10 @@ public class SignInServlet extends CinemaServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        getServletContext().getRequestDispatcher(jspDirectory + "sign-in.jsp").forward(request, response);
+        if (request.getSession().getAttribute(SessionKey.TOKEN) != null)
+            response.getWriter().write("Ok");
+        else
+            getServletContext().getRequestDispatcher(jspDirectory + "sign-in.jsp").forward(request, response);
     }
 
     @Override
@@ -29,8 +34,12 @@ public class SignInServlet extends CinemaServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        boolean result = userService.signIn(email, password);
-
-        response.getWriter().write(Boolean.toString(result));
+        User user = userService.signIn(email, password);
+        if (user != null) {
+            request.getSession().setAttribute(SessionKey.TOKEN, user.getToken());
+            response.getWriter().write("Ok");
+        } else {
+            response.getWriter().write("No User");
+        }
     }
 }
