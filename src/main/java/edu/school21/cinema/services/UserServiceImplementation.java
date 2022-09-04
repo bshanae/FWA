@@ -26,8 +26,7 @@ public class UserServiceImplementation implements UserService {
 
     public User signIn(String phone, String password) {
         User user = userRepository.findUserByPhone(phone);
-        String encodedPassword = (new BCryptPasswordEncoder()).encode(password);
-        if (user != null && user.getPassword().equals(encodedPassword)) {
+        if (user != null && (new BCryptPasswordEncoder()).matches(password, user.getPassword())) {
             return user;
         }
         return null;

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 @WebServlet("/sign-in")
 public class SignInServlet extends CinemaServlet {
@@ -34,7 +35,10 @@ public class SignInServlet extends CinemaServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
-
+        String ipAddress =  request.getRemoteAddr();
+        Date date = new Date(request.getSession().getLastAccessedTime());
+        System.out.println("ip " + ipAddress);
+        System.out.println("Date " + date.toString());
         if (phone == null || password == null) {
             response.getWriter().write("Invalid request!");
             return;
