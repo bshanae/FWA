@@ -26,17 +26,13 @@ public class ProfileServlet extends CinemaServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String token = (String) request.getSession().getAttribute(SessionKey.TOKEN);
+        System.out.println("TOKEN " + token);
         User user = userService.findByToken(token);
 
         request.setAttribute("firstName", user.getFirstName());
         request.setAttribute("lastName", user.getLastName());
         request.setAttribute("phone", user.getPhoneNumber());
         request.getRequestDispatcher(jspProfile).forward(request, response);
-
-        ServletOutputStream out = response.getOutputStream();
-        out.write("Getting user data".getBytes(StandardCharsets.UTF_8));
-        out.flush();
-        out.close();
 
     }
 }
