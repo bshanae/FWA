@@ -27,7 +27,6 @@ public class SignUpServlet extends CinemaServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        //request.getSession().setAttribute(SessionKey.TOKEN, "");
         request.getRequestDispatcher(jspSignUp).forward(request, response);
     }
 

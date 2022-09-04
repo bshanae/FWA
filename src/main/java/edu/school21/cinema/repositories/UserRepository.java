@@ -21,9 +21,9 @@ public class UserRepository {
     }
 
 
-    public boolean createUser(String firstName, String lastName, String phone, String password) {
+    public boolean createUser(User user) {
           return jdbcTemplate.update("INSERT INTO users (first_name, last_name, phone_number, password)" +
-                " VALUES(?, ?, ?, ?)", firstName, lastName, phone, password) > 0;
+                " VALUES(?, ?, ?, ?)", user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getPassword()) > 0;
     }
 
     public User findUserByPhone(String phone) {

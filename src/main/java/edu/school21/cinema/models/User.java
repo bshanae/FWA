@@ -13,8 +13,8 @@ public class User {
     private String phoneNumber;
     private String password;
 
-    public User(int id, String firstName, String lastName, String phoneNumber, String password) {
-        this.id = id;
+
+    public User(String firstName, String lastName, String phoneNumber, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
