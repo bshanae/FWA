@@ -22,7 +22,7 @@ public class UserRepository {
 
 
     public boolean createUser(User user) {
-          return jdbcTemplate.update("INSERT INTO users (first_name, last_name, phone_number, password)" +
+          return jdbcTemplate.update("INSERT INTO users (first_name, last_name, phone_number, password, email, img)" +
                 " VALUES(?, ?, ?, ?)", user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getPassword()) > 0;
     }
 

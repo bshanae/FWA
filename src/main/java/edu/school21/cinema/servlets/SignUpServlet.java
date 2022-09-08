@@ -36,13 +36,14 @@ public class SignUpServlet extends CinemaServlet {
         String lastName = request.getParameter("last-name");
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
+        String email = request.getParameter("email");
 
         if (firstName == null || lastName == null || phone == null || password == null) {
             response.getWriter().write("Invalid request!");
             return;
         }
 
-        User user = userService.signUp(firstName, lastName, phone, password);
+        User user = userService.signUp(firstName, lastName, phone, password, email);
         if (user == null) {
             response.getWriter().write("Can't create user!");
             return;

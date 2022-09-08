@@ -11,14 +11,16 @@ public class UserServiceImplementation implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User signUp(String firstName, String lastName, String phone, String password) {
+    @Override
+    public User signUp(String firstName, String lastName, String phone, String password, String email) {
         User checkUser = userRepository.findUserByPhone(phone);
         if (checkUser != null) {
             // User with that phone already exists
             return null;
         }
         String encodedPassword = (new BCryptPasswordEncoder()).encode(password);
-        User user = new User(firstName, lastName, phone, encodedPassword);
+        String img = "default.jpg";
+        User user = new User(firstName, lastName, phone, encodedPassword, email, img);
         if (userRepository.createUser(user))
             return userRepository.findUserByPhone(phone);
         return null;
@@ -33,8 +35,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     public User findByToken(String token) {
-        //Check token
-        //TODO check token in current session
+        //Our TOKEN is the  phone_number
         return userRepository.findUserByToken(token);
     }
 }
