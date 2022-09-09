@@ -11,11 +11,9 @@
     <br>
     <h3>File Upload:</h3>
     Select a file to upload: <br />
-    <form action = "profile/upload-img" method = "post"
-          enctype = "multipart/form-data">
-        <input type = "file" name = "file" />
-        <br />
-        <input type = "submit" value = "Upload File" />
+    <form method="post" action="fileuploadservlet" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <input type="submit" value="Upload" />
     </form>
 </body>
 </html>

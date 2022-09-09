@@ -33,6 +33,8 @@ public class ProfileServlet extends CinemaServlet {
         request.setAttribute("firstName", user.getFirstName());
         request.setAttribute("lastName", user.getLastName());
         request.setAttribute("phone", user.getPhoneNumber());
+        request.setAttribute("email", user.getEmail());
+        request.setAttribute("img", user.getImg());
         request.getRequestDispatcher(jspProfile).forward(request, response);
 
     }

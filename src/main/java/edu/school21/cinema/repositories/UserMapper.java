@@ -21,7 +21,7 @@ public class UserMapper implements RowMapper {
         user.setPhoneNumber(rs.getString("phone_number"));
         user.setPassword(rs.getString("password"));
 
-        return null;
+        return user;
     }
 }
 
