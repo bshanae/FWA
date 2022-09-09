@@ -36,15 +36,13 @@ public class SignInServlet extends CinemaServlet {
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         String ipAddress =  request.getRemoteAddr();
-        Date date = new Date(request.getSession().getLastAccessedTime());
-        System.out.println("ip " + ipAddress);
-        System.out.println("Date " + date.toString());
+        Long time = request.getSession().getLastAccessedTime();
         if (phone == null || password == null) {
             response.getWriter().write("Invalid request!");
             return;
         }
 
-        User user = userService.signIn(phone, password);
+        User user = userService.signIn(phone, password, ipAddress, time);
         if (user == null) {
             response.getWriter().write("User not found!");
             return;

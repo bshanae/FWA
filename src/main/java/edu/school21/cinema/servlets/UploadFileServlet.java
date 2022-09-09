@@ -1,5 +1,8 @@
 package edu.school21.cinema.servlets;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import javax.servlet.http.HttpServlet;
 
 import java.io.*;
@@ -16,16 +19,19 @@ import javax.servlet.annotation.*;
 )
 public class UploadFileServlet extends CinemaServlet {
 
+    @Autowired
+    @Qualifier("imgSaveUrl")
+    private String imgSaveUrl;
+
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        /* Receive file uploaded to the Servlet from the HTML5 form */
         Part filePart = request.getPart("file");
         String fileName = filePart.getSubmittedFileName();
         for (Part part : request.getParts()) {
-            String fileUrl =  "C:\\Users\\Danny\\Desktop\\imagesFWA\\" + fileName;
+            String fileUrl =  imgSaveUrl + fileName;
                     part.write(fileUrl);
         }
-        response.getWriter().print("The file uploaded sucessfully.");
+        response.getWriter().print("The file was uploaded sucessfully.");
     }
 
 }

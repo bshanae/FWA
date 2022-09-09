@@ -48,6 +48,9 @@ public class CinemaContext {
     }
 
     @Bean
+    public String imgSaveUrl() {return "image.url";}
+
+    @Bean
     public UserService userService() {
         return new UserServiceImplementation();
     }

@@ -9,6 +9,7 @@
     <h3>Last name: ${lastName}</h3>
     <h3>Phone number: ${phone}</h3>
     <h3>email: ${email}</h3>
+    <h3>Session Info: ${sessionInfo}</h3>
     <br>
     <h3>File Upload:</h3>
     Select a file to upload: <br />
