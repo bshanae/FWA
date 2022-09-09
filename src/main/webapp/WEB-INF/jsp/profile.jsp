@@ -8,10 +8,11 @@
     <h3>First name: ${firstName}</h3>
     <h3>Last name: ${lastName}</h3>
     <h3>Phone number: ${phone}</h3>
+    <h3>email: ${email}</h3>
     <br>
     <h3>File Upload:</h3>
     Select a file to upload: <br />
-    <form method="post" action="fileuploadservlet" enctype="multipart/form-data">
+    <form method="post" action="upload-file" enctype="multipart/form-data">
         <input type="file" name="file" />
         <input type="submit" value="Upload" />
     </form>
