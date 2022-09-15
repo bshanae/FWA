@@ -28,6 +28,11 @@ public class CinemaContext {
     }
 
     @Bean
+    public String jspHome() {
+        return "/WEB-INF/jsp/home.jsp";
+    }
+
+    @Bean
     public String jspSignIn() {
         return "/WEB-INF/jsp/sign-in.jsp";
     }
@@ -44,11 +49,15 @@ public class CinemaContext {
 
     @Bean
     public String uriProfile() {
-        return "/profile";
+        return "/fwa/profile";
     }
 
     @Bean
-    public String imgSaveUrl() {return "image.url";}
+    public String profileImage() { return "/WEB-INF/jsp/image.jsp";
+    }
+
+    @Bean
+    public String imgSaveUrl() {return env.getRequiredProperty("image.url");}
 
     @Bean
     public UserService userService() {

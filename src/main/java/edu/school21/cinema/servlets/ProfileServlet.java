@@ -2,6 +2,7 @@ package edu.school21.cinema.servlets;
 
 import edu.school21.cinema.SessionKey;
 import edu.school21.cinema.models.User;
+import edu.school21.cinema.models.UserImage;
 import edu.school21.cinema.models.UserSessionInfo;
 import edu.school21.cinema.services.UserService;
 import edu.school21.cinema.services.UserServiceImplementation;
@@ -33,13 +34,16 @@ public class ProfileServlet extends CinemaServlet {
         System.out.println("TOKEN " + token);
         User user = userService.findByToken(token);
         List<UserSessionInfo> userSessionInfos = userService.findSessionInfos(user.getId());
-
+        List<UserImage> userImages = userService.getUserAvatars(user.getId());
+        String img = userService.getUserImage(user.getImg(), user.getId());
         request.setAttribute("firstName", user.getFirstName());
         request.setAttribute("lastName", user.getLastName());
         request.setAttribute("phone", user.getPhoneNumber());
         request.setAttribute("email", user.getEmail());
         request.setAttribute("img", user.getImg());
-        request.setAttribute("sessionInfo", userSessionInfos.toString());
+        request.setAttribute("sessionInfo", userSessionInfos);
+        request.setAttribute("images", userImages);
+        request.setAttribute("profileImage", img);
         request.getRequestDispatcher(jspProfile).forward(request, response);
 
     }

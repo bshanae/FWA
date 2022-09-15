@@ -20,8 +20,8 @@ public class UserSessionInfoRepository {
     }
 
     public boolean create(UserSessionInfo session) {
-        return jdbcTemplate.update("INSERT INTO session_info (user_id, time, ip_address)" +
-                " VALUES(?, ?, ?)", session.getUserId(), session.getTime(), session.getIp()) > 0;
+        return jdbcTemplate.update("INSERT INTO session_info (user_id, time_milisec, ip, date, time)" +
+                " VALUES(?, ?, ?, ?, ?)", session.getUserId(), session.getTimeMilisec(), session.getIp(), session.getDate(), session.getTime()) > 0;
     }
 
     public List<UserSessionInfo> findById(int userId) {
@@ -30,8 +30,8 @@ public class UserSessionInfoRepository {
 
     //not necesary
     public void update(UserSessionInfo updatedSession) {
-        jdbcTemplate.update("UPDATE session_info SET user_id=?, time=?, ip_address=?", updatedSession.getUserId(),
-                updatedSession.getTime(), updatedSession.getIp());
+        jdbcTemplate.update("UPDATE session_info SET user_id=?, time=?, ip=? where id=?", updatedSession.getUserId(),
+                updatedSession.getTime(), updatedSession.getIp(), updatedSession.getId());
     }
 
     //Use in case if user delete his profile?

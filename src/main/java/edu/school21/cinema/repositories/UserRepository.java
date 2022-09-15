@@ -23,18 +23,24 @@ public class UserRepository {
 
     public boolean createUser(User user) {
           return jdbcTemplate.update("INSERT INTO users (first_name, last_name, phone_number, password, email, img)" +
-                " VALUES(?, ?, ?, ?)", user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getPassword()) > 0;
+                " VALUES(?, ?, ?, ?, ?, ?)", user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getPassword(), user.getEmail(), user.getImg()) > 0;
     }
-
     public User findUserByPhone(String phone) {
+
             User user = jdbcTemplate.query("SELECT * FROM users where phone_number=?", new BeanPropertyRowMapper<>(User.class), phone)
                     .stream().findAny().orElse(null);
             return user;
     }
 
-    public void update(String phone, User updatedUser) {
-        jdbcTemplate.update("UPDATE users SET first_name=?, last_name=?, phone_number=?, password=?", updatedUser.getFirstName(),
-                updatedUser.getLastName(), updatedUser.getPhoneNumber(), updatedUser.getPassword());
+    public User findUserById(int id) {
+        User user = jdbcTemplate.query("SELECT * FROM users where id=?", new BeanPropertyRowMapper<>(User.class), id)
+                .stream().findAny().orElse(null);
+        return user;
+    }
+
+    public void update(User updatedUser) {
+        jdbcTemplate.update("UPDATE users SET first_name=?, last_name=?, phone_number=?, password=?, email=?, img=? where id=?", updatedUser.getFirstName(),
+                updatedUser.getLastName(), updatedUser.getPhoneNumber(), updatedUser.getPassword(), updatedUser.getEmail(), updatedUser.getImg(), updatedUser.getId());
     }
 
     public void delete(int id) {

@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/sign-in", "/sign-up"}, filterName = "nonAuthorizedFilter")
+// @WebFilter(urlPatterns = {"/sign-in", "/sign-up"}, filterName = "nonAuthorizedFilter")
+@WebFilter(urlPatterns = {"/sign-in"}, filterName = "nonAuthorizedFilter")
 public class NonAuthorizedFilter extends CinemaFilter {
     @Autowired
     @Qualifier("uriProfile")

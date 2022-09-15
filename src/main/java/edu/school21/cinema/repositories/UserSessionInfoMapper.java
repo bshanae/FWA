@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class UserSessionInfoMapper implements RowMapper<UserSessionInfo> {
 
@@ -15,8 +16,10 @@ public class UserSessionInfoMapper implements RowMapper<UserSessionInfo> {
 
         userSessionInfo.setId(rs.getInt("id"));
         userSessionInfo.setUserId(rs.getInt("user_id"));
-        userSessionInfo.setTime(rs.getLong("time"));
         userSessionInfo.setIp(rs.getString("ip"));
+        userSessionInfo.setTimeMilisec(rs.getLong("time_milisec"));
+        userSessionInfo.setTime(rs.getString("time"));
+        userSessionInfo.setDate(rs.getString("date"));
 
         return userSessionInfo;
     }
