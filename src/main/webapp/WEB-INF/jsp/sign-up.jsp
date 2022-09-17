@@ -64,7 +64,7 @@
             <input type="password" id="password" name="password" required>
         </div>
         <div>
-            <button type="submit">Sign in</button>
+            <button type="submit">Sign up</button>
         </div>
     </form>
     </div>
