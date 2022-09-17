@@ -1,7 +1,6 @@
 package edu.school21.cinema.models;
 
 import lombok.Data;
-import lombok.Getter;
 
 
 @Data
@@ -24,7 +23,8 @@ public class User {
         this.img = img;
     }
 
-    public User(){}
+    public User() {
+    }
 
     public String getToken() {
         return phoneNumber;

@@ -53,11 +53,14 @@ public class CinemaContext {
     }
 
     @Bean
-    public String profileImage() { return "/WEB-INF/jsp/image.jsp";
+    public String profileImage() {
+        return "/WEB-INF/jsp/image.jsp";
     }
 
     @Bean
-    public String imgSaveUrl() {return env.getRequiredProperty("image.url");}
+    public String imgSaveUrl() {
+        return env.getRequiredProperty("image.url");
+    }
 
     @Bean
     public UserService userService() {

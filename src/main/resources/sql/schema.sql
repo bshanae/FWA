@@ -13,7 +13,7 @@ create table session_info
 (
     id  SERIAL PRIMARY KEY,
     user_id SERIAL NOT NULL,
-    time_milisec BIGINT,
+    time_millis BIGINT,
     ip  VARCHAR,
     time VARCHAR,
     date VARCHAR

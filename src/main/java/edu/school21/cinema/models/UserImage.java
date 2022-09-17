@@ -12,7 +12,7 @@ public class UserImage {
     private Long size;
     private String mime;
 
-    public UserImage(){
+    public UserImage() {
     }
 
     public UserImage(int userId, String originalName, String name, Long size, String mime) {

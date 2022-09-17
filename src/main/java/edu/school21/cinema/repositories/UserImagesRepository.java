@@ -20,12 +20,22 @@ public class UserImagesRepository {
     }
 
     public boolean create(UserImage img) {
-        return jdbcTemplate.update("INSERT INTO user_images (user_id, original_name, name, size, mime)" +
-                " VALUES(?, ?, ?, ? , ?)", img.getUserId(), img.getOriginalName(), img.getName(), img.getSize(), img.getMime()) > 0;
+        int result = jdbcTemplate.update(
+                "INSERT INTO user_images (user_id, original_name, name, size, mime) VALUES(?, ?, ?, ? , ?)",
+                img.getUserId(),
+                img.getOriginalName(),
+                img.getName(),
+                img.getSize(),
+                img.getMime());
+
+        return result > 0;
     }
 
     public List<UserImage> findById(int userId) {
-        return jdbcTemplate.query("SELECT * FROM user_images where user_id=?", new BeanPropertyRowMapper<>(UserImage.class), userId);
+        return jdbcTemplate.query(
+                "SELECT * FROM user_images where user_id=?",
+                new BeanPropertyRowMapper<>(UserImage.class),
+                userId);
     }
 
 }

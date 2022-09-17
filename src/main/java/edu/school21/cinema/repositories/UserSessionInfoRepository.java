@@ -1,6 +1,5 @@
 package edu.school21.cinema.repositories;
 
-import edu.school21.cinema.models.User;
 import edu.school21.cinema.models.UserSessionInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -20,21 +19,33 @@ public class UserSessionInfoRepository {
     }
 
     public boolean create(UserSessionInfo session) {
-        return jdbcTemplate.update("INSERT INTO session_info (user_id, time_milisec, ip, date, time)" +
-                " VALUES(?, ?, ?, ?, ?)", session.getUserId(), session.getTimeMilisec(), session.getIp(), session.getDate(), session.getTime()) > 0;
+        int result = jdbcTemplate.update(
+                "INSERT INTO session_info (user_id, time_millis, ip, date, time) VALUES(?, ?, ?, ?, ?)",
+                session.getUserId(),
+                session.getTimeMillis(),
+                session.getIp(),
+                session.getDate(),
+                session.getTime());
+
+        return result > 0;
     }
 
     public List<UserSessionInfo> findById(int userId) {
-        return jdbcTemplate.query("SELECT * FROM session_info where user_id=?", new BeanPropertyRowMapper<>(UserSessionInfo.class), userId);
+        return jdbcTemplate.query(
+                "SELECT * FROM session_info where user_id=?",
+                new BeanPropertyRowMapper<>(UserSessionInfo.class),
+                userId);
     }
 
-    //not necesary
     public void update(UserSessionInfo updatedSession) {
-        jdbcTemplate.update("UPDATE session_info SET user_id=?, time=?, ip=? where id=?", updatedSession.getUserId(),
-                updatedSession.getTime(), updatedSession.getIp(), updatedSession.getId());
+        jdbcTemplate.update(
+                "UPDATE session_info SET user_id=?, time=?, ip=? where id=?",
+                updatedSession.getUserId(),
+                updatedSession.getTime(),
+                updatedSession.getIp(),
+                updatedSession.getId());
     }
 
-    //Use in case if user delete his profile?
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM session_info where id=?", id);
     }

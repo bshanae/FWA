@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.ClientInfoStatus;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -33,33 +31,33 @@ public class UserServiceImplementation implements UserService {
     private String imgSaveUrl;
 
     @Override
-    public User signUp(String firstName, String lastName, String phone, String password, String email, String ip, Long timeMilisec) {
+    public User signUp(String firstName, String lastName, String phone, String password, String email, String ip, Long timeMillis) {
         User checkUser = userRepository.findUserByPhone(phone);
         if (checkUser != null) {
-            // User with that phone already exists
             return null;
         }
+
         String encodedPassword = (new BCryptPasswordEncoder()).encode(password);
         String img = "default.jpg";
         User user = new User(firstName, lastName, phone, encodedPassword, email, img);
         if (userRepository.createUser(user)) {
-            String[] dateInfo = (new Date(timeMilisec)).toString().split(" ");
+            String[] dateInfo = (new Date(timeMillis)).toString().split(" ");
             String date = dateInfo[0] + " " + dateInfo[1] + " " + dateInfo[2] + " " + dateInfo[5];
             String time = dateInfo[3];
-            UserSessionInfo userSessionInfo = new UserSessionInfo(user.getId(), timeMilisec, ip, date, time);
+            UserSessionInfo userSessionInfo = new UserSessionInfo(user.getId(), timeMillis, ip, date, time);
             userSessionInfoRepository.create(userSessionInfo);
             return userRepository.findUserByPhone(phone);
         }
         return null;
     }
 
-    public User signIn(String phone, String password, String ip, Long timeMilisec) {
+    public User signIn(String phone, String password, String ip, Long timeMillis) {
         User user = userRepository.findUserByPhone(phone);
         if (user != null && (new BCryptPasswordEncoder()).matches(password, user.getPassword())) {
-            String[] dateInfo = (new Date(timeMilisec)).toString().split(" ");
+            String[] dateInfo = (new Date(timeMillis)).toString().split(" ");
             String date = dateInfo[0] + " " + dateInfo[1] + " " + dateInfo[2] + " " + dateInfo[5];
             String time = dateInfo[3];
-            UserSessionInfo userSessionInfo = new UserSessionInfo(user.getId(), timeMilisec, ip, date, time);
+            UserSessionInfo userSessionInfo = new UserSessionInfo(user.getId(), timeMillis, ip, date, time);
             userSessionInfoRepository.create(userSessionInfo);
             return user;
         }
@@ -67,7 +65,6 @@ public class UserServiceImplementation implements UserService {
     }
 
     public User findByToken(String token) {
-        //Our TOKEN is the  phone_number
         return userRepository.findUserByToken(token);
     }
 
@@ -81,7 +78,7 @@ public class UserServiceImplementation implements UserService {
     public List<UserImage> getUserAvatars(int userId) {
         List<UserImage> list = userImagesRepository.findById(userId);
         if (list == null) {
-            return  new ArrayList<>();
+            return new ArrayList<>();
         }
         return list;
     }
@@ -90,18 +87,23 @@ public class UserServiceImplementation implements UserService {
         String img = "";
         try {
             List<UserImage> list = userImagesRepository.findById(userId);
-            UserImage imgData = list.stream().filter(element -> element.getOriginalName().equals(filename)).findAny().orElse(null);
-            if (imgData == null) {
+
+            UserImage imgData = list.stream()
+                                    .filter(element -> element.getOriginalName().equals(filename))
+                                    .findAny()
+                                    .orElse(null);
+            if (imgData == null)
                 imgData = new UserImage(0, filename, filename, 0L, "image/jpg");
-            }
+
             String extension = imgData.getMime().substring(imgData.getMime().indexOf("/", 1) + 1);
 
-            File image = new File(imgSaveUrl + imgData.getName());
-            FileInputStream fileInputStream = new FileInputStream(image);
+            byte[] bytes;
+            int read;
+            try (FileInputStream fileInputStream = new FileInputStream(imgSaveUrl + imgData.getName())) {
+                bytes = new byte[fileInputStream.available()];
+                read = fileInputStream.read(bytes);
+            }
 
-            byte[] bytes = new byte[fileInputStream.available()];
-
-            int read = fileInputStream.read(bytes);
             if (read == 0) {
                 return "";
             }

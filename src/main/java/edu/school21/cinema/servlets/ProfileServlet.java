@@ -4,19 +4,15 @@ import edu.school21.cinema.SessionKey;
 import edu.school21.cinema.models.User;
 import edu.school21.cinema.models.UserImage;
 import edu.school21.cinema.models.UserSessionInfo;
-import edu.school21.cinema.services.UserService;
 import edu.school21.cinema.services.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @WebServlet("/profile")
@@ -31,11 +27,13 @@ public class ProfileServlet extends CinemaServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String token = (String) request.getSession().getAttribute(SessionKey.TOKEN);
-        System.out.println("TOKEN " + token);
+
         User user = userService.findByToken(token);
+
         List<UserSessionInfo> userSessionInfos = userService.findSessionInfos(user.getId());
         List<UserImage> userImages = userService.getUserAvatars(user.getId());
         String img = userService.getUserImage(user.getImg(), user.getId());
+
         request.setAttribute("firstName", user.getFirstName());
         request.setAttribute("lastName", user.getLastName());
         request.setAttribute("phone", user.getPhoneNumber());
@@ -44,7 +42,7 @@ public class ProfileServlet extends CinemaServlet {
         request.setAttribute("sessionInfo", userSessionInfos);
         request.setAttribute("images", userImages);
         request.setAttribute("profileImage", img);
-        request.getRequestDispatcher(jspProfile).forward(request, response);
 
+        request.getRequestDispatcher(jspProfile).forward(request, response);
     }
 }

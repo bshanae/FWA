@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserImagesMapper implements RowMapper {
+public class UserImagesMapper implements RowMapper<UserImage> {
     @Override
     public UserImage mapRow(ResultSet rs, int rowNum) throws SQLException {
         UserImage img = new UserImage();
@@ -17,7 +17,6 @@ public class UserImagesMapper implements RowMapper {
         img.setName(rs.getString("name"));
         img.setSize(rs.getLong("size"));
         img.setMime(rs.getString("mime"));
-
 
         return img;
     }
