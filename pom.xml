@@ -15,7 +15,6 @@
     <url>http://maven.apache.org</url>
 
     <dependencies>
-
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -78,6 +77,7 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
@@ -90,17 +90,15 @@
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-
-
     </dependencies>
 
     <build>
         <finalName>fwa</finalName>
     </build>
-
 </project>

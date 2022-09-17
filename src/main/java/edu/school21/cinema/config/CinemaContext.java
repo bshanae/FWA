@@ -49,7 +49,7 @@ public class CinemaContext {
 
     @Bean
     public String uriProfile() {
-        return "/fwa/profile";
+        return "/profile";
     }
 
     @Bean
