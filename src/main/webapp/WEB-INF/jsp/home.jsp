@@ -31,12 +31,12 @@
 <body>
 <h1>FWA</h1>
 <div class="container">
-    <form action="sign-in" method="get">
+    <form action="signIn" method="get">
         <div>
             <button type="submit">Sign in</button>
         </div>
     </form>
-    <form action="sign-up" method="get">
+    <form action="signUp" method="get">
         <div>
             <button type="submit">Sign up</button>
         </div>
