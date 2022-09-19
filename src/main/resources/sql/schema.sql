@@ -12,7 +12,7 @@ create table users
 create table session_info
 (
     id  SERIAL PRIMARY KEY,
-    user_id SERIAL NOT NULL,
+    user_id INT NOT NULL,
     time_millis BIGINT,
     ip  VARCHAR,
     time VARCHAR,
@@ -22,6 +22,7 @@ create table session_info
 create table user_images
 (
     id  SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
     original_name VARCHAR,
     name  VARCHAR,
     size BIGINT,
