@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/sign-up")
+@WebServlet("/signUp")
 public class SignUpServlet extends CinemaServlet {
     @Autowired
     @Qualifier("jspSignUp")

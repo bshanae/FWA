@@ -1,13 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
-    <title>Sign up</title>
+    <title>Sign in</title>
     <style>
         body {font-family: Arial, Helvetica, sans-serif;}
         form {
             border: 3px solid #A7C7E7;
             width: 30%;
             border-radius: 2px;
+            text-align: center;
         }
 
         input {
@@ -40,33 +41,22 @@
     </style>
 </head>
 <body>
-    <h1>Sign up</h1>
+    <h1>Sign in</h1>
     <div class="container">
-    <form action="sign-up" method="post">
-        <div>
-            <label for="first-name">First name</label>
-            <input id="first-name" name="first-name" required>
-        </div>
-        <div>
-            <label for="last-name">Last name</label>
-            <input id="last-name" name="last-name" required>
-        </div>
-        <div>
+    <form action="signIn" method="post">
+        <div >
             <label for="phone">Phone number</label>
-            <input type="tel" id="phone" name="phone" required>
-        </div>
-        <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input id="phone" name="phone" required>
         </div>
         <div>
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
         </div>
         <div>
-            <button type="submit">Sign up</button>
+            <button type="submit">Sign in</button>
         </div>
     </form>
     </div>
 </body>
 </html>
+
