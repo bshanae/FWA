@@ -58,6 +58,11 @@ public class CinemaContext {
     }
 
     @Bean
+    public String defaultImage() {
+        return "/fwa/WEB-INF/img/";
+    }
+
+    @Bean
     public String imgSaveUrl() {
         return env.getRequiredProperty("image.url");
     }

@@ -10,12 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.servlet.ServletContext;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
+import java.io.InputStream;
+import java.util.*;
 
 
 public class UserServiceImplementation implements UserService {
@@ -29,6 +28,9 @@ public class UserServiceImplementation implements UserService {
     @Autowired
     @Qualifier("imgSaveUrl")
     private String imgSaveUrl;
+    @Autowired
+    @Qualifier("defaultImage")
+    private String defaultImage;
 
     @Override
     public User signUp(String firstName, String lastName, String phone, String password, String email, String ip, Long timeMillis) {
@@ -92,16 +94,21 @@ public class UserServiceImplementation implements UserService {
                                     .filter(element -> element.getOriginalName().equals(filename))
                                     .findAny()
                                     .orElse(null);
-            if (imgData == null)
-                imgData = new UserImage(0, filename, filename, 0L, "image/jpg");
-
-            String extension = imgData.getMime().substring(imgData.getMime().indexOf("/", 1) + 1);
-
+            String extension = "";
             byte[] bytes;
             int read;
-            try (FileInputStream fileInputStream = new FileInputStream(imgSaveUrl + imgData.getName())) {
-                bytes = new byte[fileInputStream.available()];
-                read = fileInputStream.read(bytes);
+            if (imgData == null) {
+                try (InputStream inputStream = getClass().getResourceAsStream("/default.jpg");) {
+                    extension = "jpg";
+                    bytes = new byte[inputStream.available()];
+                    read = inputStream.read(bytes);
+                }
+            } else {
+                try (FileInputStream fileInputStream = new FileInputStream(imgSaveUrl + imgData.getName())) {
+                    bytes = new byte[fileInputStream.available()];
+                    read = fileInputStream.read(bytes);
+                    extension = imgData.getMime().substring(imgData.getMime().indexOf("/", 1) + 1);
+                }
             }
 
             if (read == 0) {
