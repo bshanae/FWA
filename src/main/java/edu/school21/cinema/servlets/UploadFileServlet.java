@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.List;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -49,7 +50,7 @@ public class UploadFileServlet extends CinemaServlet {
         UserImage img = new UserImage(user.getId(), originalFileName, fileName, fileSize, contentType);
 
         for (Part part : request.getParts()) {
-            String fileUrl =  imgSaveUrl + fileName;
+            String fileUrl =  Paths.get(imgSaveUrl, fileName).toString();
             part.write(fileUrl);
         }
 

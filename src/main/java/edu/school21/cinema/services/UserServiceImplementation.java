@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.*;
 
 
@@ -101,7 +102,8 @@ public class UserServiceImplementation implements UserService {
                     read = inputStream.read(bytes);
                 }
             } else {
-                try (FileInputStream fileInputStream = new FileInputStream(imgSaveUrl + imgData.getName())) {
+                String path = Paths.get(imgSaveUrl, imgData.getName()).toString();
+                try (FileInputStream fileInputStream = new FileInputStream(path)) {
                     bytes = new byte[fileInputStream.available()];
                     read = fileInputStream.read(bytes);
                     extension = imgData.getMime().substring(imgData.getMime().indexOf("/", 1) + 1);
