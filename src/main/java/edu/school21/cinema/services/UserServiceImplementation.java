@@ -42,9 +42,10 @@ public class UserServiceImplementation implements UserService {
             String[] dateInfo = (new Date(timeMillis)).toString().split(" ");
             String date = dateInfo[0] + " " + dateInfo[1] + " " + dateInfo[2] + " " + dateInfo[5];
             String time = dateInfo[3];
-            UserSessionInfo userSessionInfo = new UserSessionInfo(user.getId(), timeMillis, ip, date, time);
+            User newUser = userRepository.findUserByPhone(phone);
+            UserSessionInfo userSessionInfo = new UserSessionInfo(newUser.getId(), timeMillis, ip, date, time);
             userSessionInfoRepository.create(userSessionInfo);
-            return userRepository.findUserByPhone(phone);
+            return newUser;
         }
         return null;
     }
