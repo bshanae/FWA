@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.servlet.ServletContext;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,9 +27,6 @@ public class UserServiceImplementation implements UserService {
     @Autowired
     @Qualifier("imgSaveUrl")
     private String imgSaveUrl;
-    @Autowired
-    @Qualifier("defaultImage")
-    private String defaultImage;
 
     @Override
     public User signUp(String firstName, String lastName, String phone, String password, String email, String ip, Long timeMillis) {
