@@ -2,10 +2,10 @@
 
 Small Java Web project for learning Java Servlets.
 The required functionlaity is following:
-* Registration
-* Authorization
-* Adding image to profile
-* Display date and time of each login
+* Registration,
+* Authorization,
+* Adding image to profile,
+* Display date and time of each login.
 
 ## Instructions
 
