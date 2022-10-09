@@ -36,7 +36,8 @@ mvn clean install
 
 First, you need to launch Tomcat:
 ``` shell
-[tomcat root]/libexec/bin/shutdown.sh
+cd [tomcat root]/bin/libexec
+./catalina.sh start
 ```
 
 Then deploy the archive by placing it in `webapps` directory:
